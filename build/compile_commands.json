@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/brian/git/blisp/build",
+  "command": "/usr/lib64/ccache/gcc -lreadline -g -o CMakeFiles/blisp.dir/main.c.o -c /home/brian/git/blisp/main.c",
+  "file": "/home/brian/git/blisp/main.c"
+},
+{
+  "directory": "/home/brian/git/blisp/build",
+  "command": "/usr/lib64/ccache/gcc -lreadline -g -o CMakeFiles/blisp.dir/io.c.o -c /home/brian/git/blisp/io.c",
+  "file": "/home/brian/git/blisp/io.c"
+},
+{
+  "directory": "/home/brian/git/blisp/build",
+  "command": "/usr/lib64/ccache/gcc -lreadline -g -o CMakeFiles/blisp.dir/lexparse.c.o -c /home/brian/git/blisp/lexparse.c",
+  "file": "/home/brian/git/blisp/lexparse.c"
+},
+{
+  "directory": "/home/brian/git/blisp/build",
+  "command": "/usr/lib64/ccache/gcc -lreadline -g -o CMakeFiles/blisp.dir/interpreter.c.o -c /home/brian/git/blisp/interpreter.c",
+  "file": "/home/brian/git/blisp/interpreter.c"
+}
+]

@@ -1,0 +1,5 @@
+# ninja log v5
+1	43	1675911102752680459	CMakeFiles/blisp.dir/main.c.o	1f31db0b4273634f
+1	66	1675911102776680341	CMakeFiles/blisp.dir/lexparse.c.o	c14486bb16160b7a
+1	55	1675911102765680395	CMakeFiles/blisp.dir/io.c.o	d6421c17005ef180
+66	87	1675911102799680228	blisp	9b0a0972ae6edfd0

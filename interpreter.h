@@ -1,0 +1,6 @@
+#ifndef BLISP_INTERPRETER
+#define BLISP_INTERPRETER
+
+
+
+#endif
