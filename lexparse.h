@@ -1,6 +1,8 @@
 #ifndef BLISP_LEXPARSE
 #define BLISP_LEXPARSE
 
+#include <stdbool.h>
+
 #define MAX_IDENTIFIER_LENGTH 30
 #define MAX_STRING_LENGTH 256
 

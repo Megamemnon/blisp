@@ -25,4 +25,8 @@ int main(int argc, char const *argv[]){
   char *aststr=getASTString(nodes, true);
   output(aststr, NULL, 0, BLISP_STREAM_CONSOLE);
   newLine();
+  astnode *result=eval(nodes);
+  char *rtext=getASTString(result, true);
+  output(rtext, NULL, 0, BLISP_STREAM_CONSOLE);
+  newLine();
 }

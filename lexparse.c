@@ -303,12 +303,43 @@ astnode *tokenize(char *text){
   return root;
 }
 
-astnode *term(astnode *token){
+astnode *termold(astnode *token){
   static int serial=0;
   astnode *myterm=NULL;
   if(token->type==PAREN && token->identifier[0]=='('){
     token=token->next;
     myterm=createAST(token->identifier, OPERATOR, serial++);
+    astnode *mytermnext=myterm;
+    token=token->next;
+    while(token){
+      if(token->type==PAREN && token->identifier[0]==')'){
+        myterm->nexttoken=token->next;
+        return myterm;
+      }
+      if(token->type!=PAREN){
+        BLisp_Token t=ATOM;
+        if(token->type==NUMBER) t=NUMBER;
+        if(token->type==TEXT) t=TEXT;
+        mytermnext->next=createAST(token->identifier, t, serial++);
+        mytermnext=mytermnext->next;
+        token=token->next;
+      }
+      if(token->type==PAREN && token->identifier[0]=='('){
+        mytermnext->down=term(token);
+        token=mytermnext->down->nexttoken;
+        mytermnext->down->nexttoken=NULL;
+      }
+    }
+  }
+  //TODO ERROR - Left Parenthesis expected
+  return NULL;
+}
+
+astnode *term(astnode *token){
+  static int serial=0;
+  astnode *myterm=NULL;
+  if(token->type==PAREN && token->identifier[0]=='('){
+    myterm=createAST("(", PAREN, serial++);
     astnode *mytermnext=myterm;
     token=token->next;
     while(token){
@@ -369,6 +400,45 @@ char *getTokenString(astnode *token){
 }
 
 char *getASTString(astnode *node, bool paren){
+  if(!node) return NULL;
+  int s=strlen(node->identifier)+2;
+  char *thisstr=malloc(s);
+  strcpy(thisstr, node->identifier);
+  strcat(thisstr, " ");
+  // if(paren){
+  //   s+=1;
+  //   char *thstr=malloc(s);
+  //   strcpy(thstr, "(");
+  //   strcat(thstr, thisstr);
+  //   free(thisstr);
+  //   thisstr=thstr;
+  // }
+  char *downstr=getASTString(node->down, true);
+  if(node->down) s+=strlen(downstr)+2;
+  char *nextstr=getASTString(node->next, false);
+  if(node->next) s+=strlen(nextstr);
+  char *returnstr=malloc(s);
+  strcpy(returnstr, thisstr);
+  if(node->down){
+    strcat(returnstr, downstr);
+    free(downstr);
+  }
+  if(node->next){
+    strcat(returnstr, nextstr);
+    free(nextstr);
+  }
+  if(node->type==PAREN){
+    s+=1;
+    char *thstr=malloc(s);
+    strcpy(thstr, returnstr);
+    strcat(thstr, ")");
+    free(returnstr);
+    returnstr=thstr;
+  }
+  return returnstr;
+}
+
+char *getASTStringold(astnode *node, bool paren){
   if(!node) return NULL;
   int s=strlen(node->identifier)+2;
   char *thisstr=malloc(s);
